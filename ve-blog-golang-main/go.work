@@ -1,0 +1,14 @@
+go 1.23.3
+
+use (
+	blog-gin
+	blog-gozero
+	kit
+	stompws
+	tools
+)
+
+// go work init
+// go work sync
+
+//replace github.com/ve-weiyi/ve-blog-golang/kit => ./kit

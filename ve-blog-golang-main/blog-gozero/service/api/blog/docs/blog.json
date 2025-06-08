@@ -1,0 +1,5240 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "博客前台API接口文档",
+    "title": "博客前台API",
+    "termsOfService": "https://github.com/ve-weiyi/ve-blog-golang",
+    "contact": {
+      "name": "waynie.wei",
+      "url": "https://github.com/ve-weiyi/ve-blog-golang",
+      "email": "791422171@qq.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/ve-weiyi/ve-blog-golang/main/LICENSE"
+    },
+    "version": "v3.5.1"
+  },
+  "host": "blog.veweiyi.com",
+  "basePath": "/",
+  "paths": {
+    "/blog-api/v1/album/find_album_list": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "相册"
+        ],
+        "summary": "获取相册列表",
+        "operationId": "albumFindAlbumList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer"
+                },
+                "page_size": {
+                  "type": "integer"
+                },
+                "sorts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/album/find_photo_list": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "相册"
+        ],
+        "summary": "获取相册下的照片列表",
+        "operationId": "albumFindPhotoList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "album_id"
+              ],
+              "properties": {
+                "album_id": {
+                  "description": "相册ID",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/album/get_album": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "相册"
+        ],
+        "summary": "获取相册",
+        "operationId": "albumGetAlbum",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "album_cover": {
+                      "description": "相册封面",
+                      "type": "string"
+                    },
+                    "album_desc": {
+                      "description": "相册描述",
+                      "type": "string"
+                    },
+                    "album_name": {
+                      "description": "相册名",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "主键",
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/article/get_article_archives": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "文章"
+        ],
+        "summary": "文章归档(时间轴)",
+        "operationId": "articleFindArticleArchives",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer"
+                },
+                "page_size": {
+                  "type": "integer"
+                },
+                "sorts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/article/get_article_classify_category": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "文章"
+        ],
+        "summary": "通过分类获取文章列表",
+        "operationId": "articleFindArticleClassifyCategory",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "classify_name": {
+                  "description": "分类名",
+                  "type": "string"
+                },
+                "page": {
+                  "type": "integer"
+                },
+                "page_size": {
+                  "type": "integer"
+                },
+                "sorts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/article/get_article_classify_tag": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "文章"
+        ],
+        "summary": "通过标签获取文章列表",
+        "operationId": "articleFindArticleClassifyTag",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "classify_name": {
+                  "description": "分类名",
+                  "type": "string"
+                },
+                "page": {
+                  "type": "integer"
+                },
+                "page_size": {
+                  "type": "integer"
+                },
+                "sorts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/article/get_article_details": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "文章"
+        ],
+        "summary": "获取文章详情",
+        "operationId": "articleGetArticleDetails",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "article_content": {
+                      "description": "内容",
+                      "type": "string"
+                    },
+                    "article_cover": {
+                      "description": "文章缩略图",
+                      "type": "string"
+                    },
+                    "article_title": {
+                      "description": "标题",
+                      "type": "string"
+                    },
+                    "article_type": {
+                      "description": "文章类型",
+                      "type": "integer"
+                    },
+                    "category_name": {
+                      "description": "文章分类名",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "发表时间",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "文章ID",
+                      "type": "integer"
+                    },
+                    "is_top": {
+                      "description": "是否置顶",
+                      "type": "integer"
+                    },
+                    "last_article": {
+                      "description": "上一篇文章",
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "article_cover",
+                        "article_title",
+                        "like_count",
+                        "views_count",
+                        "created_at"
+                      ],
+                      "properties": {
+                        "article_cover": {
+                          "description": "文章缩略图",
+                          "type": "string"
+                        },
+                        "article_title": {
+                          "description": "标题",
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "description": "创建时间",
+                          "type": "integer"
+                        },
+                        "id": {
+                          "description": "文章ID",
+                          "type": "integer"
+                        },
+                        "like_count": {
+                          "description": "点赞量",
+                          "type": "integer"
+                        },
+                        "views_count": {
+                          "description": "浏览量",
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "like_count": {
+                      "description": "点赞量",
+                      "type": "integer"
+                    },
+                    "newest_article_list": {
+                      "description": "最新文章列表",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "article_cover",
+                          "article_title",
+                          "like_count",
+                          "views_count",
+                          "created_at"
+                        ],
+                        "properties": {
+                          "article_cover": {
+                            "description": "文章缩略图",
+                            "type": "string"
+                          },
+                          "article_title": {
+                            "description": "标题",
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "description": "创建时间",
+                            "type": "integer"
+                          },
+                          "id": {
+                            "description": "文章ID",
+                            "type": "integer"
+                          },
+                          "like_count": {
+                            "description": "点赞量",
+                            "type": "integer"
+                          },
+                          "views_count": {
+                            "description": "浏览量",
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    },
+                    "next_article": {
+                      "description": "下一篇文章",
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "article_cover",
+                        "article_title",
+                        "like_count",
+                        "views_count",
+                        "created_at"
+                      ],
+                      "properties": {
+                        "article_cover": {
+                          "description": "文章缩略图",
+                          "type": "string"
+                        },
+                        "article_title": {
+                          "description": "标题",
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "description": "创建时间",
+                          "type": "integer"
+                        },
+                        "id": {
+                          "description": "文章ID",
+                          "type": "integer"
+                        },
+                        "like_count": {
+                          "description": "点赞量",
+                          "type": "integer"
+                        },
+                        "views_count": {
+                          "description": "浏览量",
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "original_url": {
+                      "description": "原文链接",
+                      "type": "string"
+                    },
+                    "recommend_article_list": {
+                      "description": "推荐文章列表",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "article_cover",
+                          "article_title",
+                          "like_count",
+                          "views_count",
+                          "created_at"
+                        ],
+                        "properties": {
+                          "article_cover": {
+                            "description": "文章缩略图",
+                            "type": "string"
+                          },
+                          "article_title": {
+                            "description": "标题",
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "description": "创建时间",
+                            "type": "integer"
+                          },
+                          "id": {
+                            "description": "文章ID",
+                            "type": "integer"
+                          },
+                          "like_count": {
+                            "description": "点赞量",
+                            "type": "integer"
+                          },
+                          "views_count": {
+                            "description": "浏览量",
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    },
+                    "status": {
+                      "description": "状态值 1 公开 2 私密 3 草稿 4 已删除",
+                      "type": "integer"
+                    },
+                    "tag_name_list": {
+                      "description": "文章标签列表",
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "updated_at": {
+                      "description": "更新时间",
+                      "type": "integer"
+                    },
+                    "views_count": {
+                      "description": "浏览量",
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/article/get_article_home_list": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "文章"
+        ],
+        "summary": "获取首页文章列表",
+        "operationId": "articleFindArticleHomeList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "article_title": {
+                  "description": "标题",
+                  "type": "string"
+                },
+                "page": {
+                  "type": "integer"
+                },
+                "page_size": {
+                  "type": "integer"
+                },
+                "sorts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/article/get_article_recommend": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "文章"
+        ],
+        "summary": "获取首页推荐文章列表",
+        "operationId": "articleFindArticleRecommend",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/article/like_article": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "文章"
+        ],
+        "summary": "点赞文章",
+        "operationId": "articleLikeArticle",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/blog": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "网站"
+        ],
+        "summary": "获取博客前台首页信息",
+        "operationId": "websiteGetBlogHomeInfo",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "article_count": {
+                      "description": "文章数量",
+                      "type": "integer"
+                    },
+                    "category_count": {
+                      "description": "分类数量",
+                      "type": "integer"
+                    },
+                    "page_list": {
+                      "description": "页面列表",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "page_name",
+                          "page_label",
+                          "page_cover"
+                        ],
+                        "properties": {
+                          "id": {
+                            "description": "页面ID",
+                            "type": "integer"
+                          },
+                          "is_carousel": {
+                            "description": "是否轮播",
+                            "type": "integer"
+                          },
+                          "page_cover": {
+                            "description": "页面封面",
+                            "type": "string"
+                          },
+                          "page_label": {
+                            "description": "页面标签",
+                            "type": "string"
+                          },
+                          "page_name": {
+                            "description": "页面名称",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "tag_count": {
+                      "description": "标签数量",
+                      "type": "integer"
+                    },
+                    "total_page_view_count": {
+                      "description": "总浏览量",
+                      "type": "integer"
+                    },
+                    "total_user_view_count": {
+                      "description": "总服务量",
+                      "type": "integer"
+                    },
+                    "website_config": {
+                      "description": "网站配置",
+                      "type": "object",
+                      "required": [
+                        "admin_url",
+                        "alipay_qr_code",
+                        "gitee",
+                        "github",
+                        "is_chat_room",
+                        "is_comment_review",
+                        "is_email_notice",
+                        "is_message_review",
+                        "is_music_player",
+                        "is_reward",
+                        "qq",
+                        "social_login_list",
+                        "social_url_list",
+                        "tourist_avatar",
+                        "user_avatar",
+                        "website_author",
+                        "website_avatar",
+                        "website_create_time",
+                        "website_intro",
+                        "website_name",
+                        "website_notice",
+                        "website_record_no",
+                        "websocket_url",
+                        "weixin_qr_code"
+                      ],
+                      "properties": {
+                        "admin_url": {
+                          "description": "后台地址",
+                          "type": "string"
+                        },
+                        "alipay_qr_code": {
+                          "description": "支付宝二维码",
+                          "type": "string"
+                        },
+                        "gitee": {
+                          "description": "Gitee",
+                          "type": "string"
+                        },
+                        "github": {
+                          "description": "Github",
+                          "type": "string"
+                        },
+                        "is_chat_room": {
+                          "description": "是否开启聊天室",
+                          "type": "integer"
+                        },
+                        "is_comment_review": {
+                          "description": "是否开启评论审核",
+                          "type": "integer"
+                        },
+                        "is_email_notice": {
+                          "description": "是否开启邮件通知",
+                          "type": "integer"
+                        },
+                        "is_message_review": {
+                          "description": "是否开启留言审核",
+                          "type": "integer"
+                        },
+                        "is_music_player": {
+                          "description": "是否开启音乐播放器",
+                          "type": "integer"
+                        },
+                        "is_reward": {
+                          "description": "是否开启打赏",
+                          "type": "integer"
+                        },
+                        "qq": {
+                          "description": "QQ",
+                          "type": "string"
+                        },
+                        "social_login_list": {
+                          "description": "社交登录列表",
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "social_url_list": {
+                          "description": "社交地址列表",
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "tourist_avatar": {
+                          "description": "游客头像",
+                          "type": "string"
+                        },
+                        "user_avatar": {
+                          "description": "用户头像",
+                          "type": "string"
+                        },
+                        "website_author": {
+                          "description": "网站作者",
+                          "type": "string"
+                        },
+                        "website_avatar": {
+                          "description": "网站头像",
+                          "type": "string"
+                        },
+                        "website_create_time": {
+                          "description": "网站创建时间",
+                          "type": "string"
+                        },
+                        "website_intro": {
+                          "description": "网站介绍",
+                          "type": "string"
+                        },
+                        "website_name": {
+                          "description": "网站名称",
+                          "type": "string"
+                        },
+                        "website_notice": {
+                          "description": "网站公告",
+                          "type": "string"
+                        },
+                        "website_record_no": {
+                          "description": "网站备案号",
+                          "type": "string"
+                        },
+                        "websocket_url": {
+                          "description": "websocket地址",
+                          "type": "string"
+                        },
+                        "weixin_qr_code": {
+                          "description": "微信二维码",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/blog/about_me": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "网站"
+        ],
+        "summary": "获取关于我的信息",
+        "operationId": "websiteGetAboutMe",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "content": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/category/find_category_list": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "分类"
+        ],
+        "summary": "分页获取文章分类列表",
+        "operationId": "categoryFindCategoryList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "category_name": {
+                  "description": "分类名",
+                  "type": "string"
+                },
+                "page": {
+                  "type": "integer"
+                },
+                "page_size": {
+                  "type": "integer"
+                },
+                "sorts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/comment/add_comment": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "评论"
+        ],
+        "summary": "创建评论",
+        "operationId": "commentAddComment",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "comment_content",
+                "type"
+              ],
+              "properties": {
+                "comment_content": {
+                  "description": "评论内容",
+                  "type": "string"
+                },
+                "parent_id": {
+                  "description": "父评论id",
+                  "type": "integer"
+                },
+                "reply_msg_id": {
+                  "description": "会话id",
+                  "type": "integer"
+                },
+                "reply_user_id": {
+                  "description": "回复用户id",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "状态 0.正常 1.已编辑 2.已删除",
+                  "type": "integer"
+                },
+                "topic_id": {
+                  "description": "主题id",
+                  "type": "integer"
+                },
+                "type": {
+                  "description": "评论类型 1.文章 2.友链 3.说说",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "comment_content": {
+                      "description": "评论内容",
+                      "type": "string"
+                    },
+                    "comment_reply_list": {
+                      "description": "评论回复列表",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "topic_id",
+                          "parent_id",
+                          "reply_msg_id",
+                          "user_id",
+                          "reply_user_id",
+                          "comment_content",
+                          "type",
+                          "created_at",
+                          "like_count",
+                          "user",
+                          "reply_user"
+                        ],
+                        "properties": {
+                          "comment_content": {
+                            "description": "评论内容",
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "description": "评论时间",
+                            "type": "integer"
+                          },
+                          "id": {
+                            "description": "评论id",
+                            "type": "integer"
+                          },
+                          "like_count": {
+                            "description": "点赞数",
+                            "type": "integer"
+                          },
+                          "parent_id": {
+                            "description": "父评论id",
+                            "type": "integer"
+                          },
+                          "reply_msg_id": {
+                            "description": "会话id",
+                            "type": "integer"
+                          },
+                          "reply_user": {
+                            "description": "被回复评论用户",
+                            "type": "object",
+                            "required": [
+                              "user_id",
+                              "username",
+                              "avatar",
+                              "nickname"
+                            ],
+                            "properties": {
+                              "avatar": {
+                                "type": "string"
+                              },
+                              "gender": {
+                                "description": "性别 0未知 1男 2女",
+                                "type": "integer"
+                              },
+                              "intro": {
+                                "description": "简介",
+                                "type": "string"
+                              },
+                              "nickname": {
+                                "type": "string"
+                              },
+                              "user_id": {
+                                "type": "string"
+                              },
+                              "username": {
+                                "type": "string"
+                              },
+                              "website": {
+                                "description": "网站",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "reply_user_id": {
+                            "description": "被回复用户id",
+                            "type": "string"
+                          },
+                          "topic_id": {
+                            "description": "主题id",
+                            "type": "integer"
+                          },
+                          "type": {
+                            "description": "评论类型 1.文章 2.友链 3.说说",
+                            "type": "integer"
+                          },
+                          "user": {
+                            "description": "用户信息",
+                            "type": "object",
+                            "required": [
+                              "user_id",
+                              "username",
+                              "avatar",
+                              "nickname"
+                            ],
+                            "properties": {
+                              "avatar": {
+                                "type": "string"
+                              },
+                              "gender": {
+                                "description": "性别 0未知 1男 2女",
+                                "type": "integer"
+                              },
+                              "intro": {
+                                "description": "简介",
+                                "type": "string"
+                              },
+                              "nickname": {
+                                "type": "string"
+                              },
+                              "user_id": {
+                                "type": "string"
+                              },
+                              "username": {
+                                "type": "string"
+                              },
+                              "website": {
+                                "description": "网站",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "user_id": {
+                            "description": "用户id",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "created_at": {
+                      "description": "评论时间",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "评论id",
+                      "type": "integer"
+                    },
+                    "like_count": {
+                      "description": "点赞数",
+                      "type": "integer"
+                    },
+                    "parent_id": {
+                      "description": "父评论id",
+                      "type": "integer"
+                    },
+                    "reply_count": {
+                      "description": "回复量",
+                      "type": "integer"
+                    },
+                    "reply_msg_id": {
+                      "description": "会话id",
+                      "type": "integer"
+                    },
+                    "reply_user": {
+                      "description": "被回复评论用户",
+                      "type": "object",
+                      "required": [
+                        "user_id",
+                        "username",
+                        "avatar",
+                        "nickname"
+                      ],
+                      "properties": {
+                        "avatar": {
+                          "type": "string"
+                        },
+                        "gender": {
+                          "description": "性别 0未知 1男 2女",
+                          "type": "integer"
+                        },
+                        "intro": {
+                          "description": "简介",
+                          "type": "string"
+                        },
+                        "nickname": {
+                          "type": "string"
+                        },
+                        "user_id": {
+                          "type": "string"
+                        },
+                        "username": {
+                          "type": "string"
+                        },
+                        "website": {
+                          "description": "网站",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "reply_user_id": {
+                      "description": "被回复用户id",
+                      "type": "string"
+                    },
+                    "topic_id": {
+                      "description": "主题id",
+                      "type": "integer"
+                    },
+                    "type": {
+                      "description": "评论类型 1.文章 2.友链 3.说说",
+                      "type": "integer"
+                    },
+                    "user": {
+                      "description": "评论用户",
+                      "type": "object",
+                      "required": [
+                        "user_id",
+                        "username",
+                        "avatar",
+                        "nickname"
+                      ],
+                      "properties": {
+                        "avatar": {
+                          "type": "string"
+                        },
+                        "gender": {
+                          "description": "性别 0未知 1男 2女",
+                          "type": "integer"
+                        },
+                        "intro": {
+                          "description": "简介",
+                          "type": "string"
+                        },
+                        "nickname": {
+                          "type": "string"
+                        },
+                        "user_id": {
+                          "type": "string"
+                        },
+                        "username": {
+                          "type": "string"
+                        },
+                        "website": {
+                          "description": "网站",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "user_id": {
+                      "description": "用户id",
+                      "type": "string"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/comment/find_comment_list": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "评论"
+        ],
+        "summary": "查询评论列表",
+        "operationId": "commentFindCommentList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer"
+                },
+                "page_size": {
+                  "type": "integer"
+                },
+                "parent_id": {
+                  "description": "父评论id",
+                  "type": "integer"
+                },
+                "sorts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "topic_id": {
+                  "description": "主题id",
+                  "type": "integer"
+                },
+                "type": {
+                  "description": "评论类型 1.文章 2.友链 3.说说",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/comment/find_comment_recent_list": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "评论"
+        ],
+        "summary": "查询最新评论回复列表",
+        "operationId": "commentFindCommentRecentList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer"
+                },
+                "page_size": {
+                  "type": "integer"
+                },
+                "parent_id": {
+                  "description": "父评论id",
+                  "type": "integer"
+                },
+                "sorts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "topic_id": {
+                  "description": "主题id",
+                  "type": "integer"
+                },
+                "type": {
+                  "description": "评论类型 1.文章 2.友链 3.说说",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/comment/find_comment_reply_list": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "评论"
+        ],
+        "summary": "查询评论回复列表",
+        "operationId": "commentFindCommentReplyList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer"
+                },
+                "page_size": {
+                  "type": "integer"
+                },
+                "parent_id": {
+                  "description": "父评论id",
+                  "type": "integer"
+                },
+                "sorts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "topic_id": {
+                  "description": "主题id",
+                  "type": "integer"
+                },
+                "type": {
+                  "description": "评论类型 1.文章 2.友链 3.说说",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/comment/like_comment": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "评论"
+        ],
+        "summary": "点赞评论",
+        "operationId": "commentLikeComment",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/comment/update_comment": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "评论"
+        ],
+        "summary": "更新评论",
+        "operationId": "commentUpdateComment",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "comment_content"
+              ],
+              "properties": {
+                "comment_content": {
+                  "description": "评论内容",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "主键",
+                  "type": "integer"
+                },
+                "reply_user_id": {
+                  "description": "回复用户id",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "状态 0.正常 1.已编辑 2.已删除",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "comment_content": {
+                      "description": "评论内容",
+                      "type": "string"
+                    },
+                    "comment_reply_list": {
+                      "description": "评论回复列表",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "topic_id",
+                          "parent_id",
+                          "reply_msg_id",
+                          "user_id",
+                          "reply_user_id",
+                          "comment_content",
+                          "type",
+                          "created_at",
+                          "like_count",
+                          "user",
+                          "reply_user"
+                        ],
+                        "properties": {
+                          "comment_content": {
+                            "description": "评论内容",
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "description": "评论时间",
+                            "type": "integer"
+                          },
+                          "id": {
+                            "description": "评论id",
+                            "type": "integer"
+                          },
+                          "like_count": {
+                            "description": "点赞数",
+                            "type": "integer"
+                          },
+                          "parent_id": {
+                            "description": "父评论id",
+                            "type": "integer"
+                          },
+                          "reply_msg_id": {
+                            "description": "会话id",
+                            "type": "integer"
+                          },
+                          "reply_user": {
+                            "description": "被回复评论用户",
+                            "type": "object",
+                            "required": [
+                              "user_id",
+                              "username",
+                              "avatar",
+                              "nickname"
+                            ],
+                            "properties": {
+                              "avatar": {
+                                "type": "string"
+                              },
+                              "gender": {
+                                "description": "性别 0未知 1男 2女",
+                                "type": "integer"
+                              },
+                              "intro": {
+                                "description": "简介",
+                                "type": "string"
+                              },
+                              "nickname": {
+                                "type": "string"
+                              },
+                              "user_id": {
+                                "type": "string"
+                              },
+                              "username": {
+                                "type": "string"
+                              },
+                              "website": {
+                                "description": "网站",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "reply_user_id": {
+                            "description": "被回复用户id",
+                            "type": "string"
+                          },
+                          "topic_id": {
+                            "description": "主题id",
+                            "type": "integer"
+                          },
+                          "type": {
+                            "description": "评论类型 1.文章 2.友链 3.说说",
+                            "type": "integer"
+                          },
+                          "user": {
+                            "description": "用户信息",
+                            "type": "object",
+                            "required": [
+                              "user_id",
+                              "username",
+                              "avatar",
+                              "nickname"
+                            ],
+                            "properties": {
+                              "avatar": {
+                                "type": "string"
+                              },
+                              "gender": {
+                                "description": "性别 0未知 1男 2女",
+                                "type": "integer"
+                              },
+                              "intro": {
+                                "description": "简介",
+                                "type": "string"
+                              },
+                              "nickname": {
+                                "type": "string"
+                              },
+                              "user_id": {
+                                "type": "string"
+                              },
+                              "username": {
+                                "type": "string"
+                              },
+                              "website": {
+                                "description": "网站",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "user_id": {
+                            "description": "用户id",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "created_at": {
+                      "description": "评论时间",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "评论id",
+                      "type": "integer"
+                    },
+                    "like_count": {
+                      "description": "点赞数",
+                      "type": "integer"
+                    },
+                    "parent_id": {
+                      "description": "父评论id",
+                      "type": "integer"
+                    },
+                    "reply_count": {
+                      "description": "回复量",
+                      "type": "integer"
+                    },
+                    "reply_msg_id": {
+                      "description": "会话id",
+                      "type": "integer"
+                    },
+                    "reply_user": {
+                      "description": "被回复评论用户",
+                      "type": "object",
+                      "required": [
+                        "user_id",
+                        "username",
+                        "avatar",
+                        "nickname"
+                      ],
+                      "properties": {
+                        "avatar": {
+                          "type": "string"
+                        },
+                        "gender": {
+                          "description": "性别 0未知 1男 2女",
+                          "type": "integer"
+                        },
+                        "intro": {
+                          "description": "简介",
+                          "type": "string"
+                        },
+                        "nickname": {
+                          "type": "string"
+                        },
+                        "user_id": {
+                          "type": "string"
+                        },
+                        "username": {
+                          "type": "string"
+                        },
+                        "website": {
+                          "description": "网站",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "reply_user_id": {
+                      "description": "被回复用户id",
+                      "type": "string"
+                    },
+                    "topic_id": {
+                      "description": "主题id",
+                      "type": "integer"
+                    },
+                    "type": {
+                      "description": "评论类型 1.文章 2.友链 3.说说",
+                      "type": "integer"
+                    },
+                    "user": {
+                      "description": "评论用户",
+                      "type": "object",
+                      "required": [
+                        "user_id",
+                        "username",
+                        "avatar",
+                        "nickname"
+                      ],
+                      "properties": {
+                        "avatar": {
+                          "type": "string"
+                        },
+                        "gender": {
+                          "description": "性别 0未知 1男 2女",
+                          "type": "integer"
+                        },
+                        "intro": {
+                          "description": "简介",
+                          "type": "string"
+                        },
+                        "nickname": {
+                          "type": "string"
+                        },
+                        "user_id": {
+                          "type": "string"
+                        },
+                        "username": {
+                          "type": "string"
+                        },
+                        "website": {
+                          "description": "网站",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "user_id": {
+                      "description": "用户id",
+                      "type": "string"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/email_login": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "认证"
+        ],
+        "summary": "邮箱登录",
+        "operationId": "authEmailLogin",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "email",
+                "password"
+              ],
+              "properties": {
+                "captcha_code": {
+                  "description": "验证码",
+                  "type": "string"
+                },
+                "captcha_key": {
+                  "description": "验证码key",
+                  "type": "string"
+                },
+                "email": {
+                  "description": "邮箱",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "密码",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "object",
+                      "required": [
+                        "user_id",
+                        "token_type",
+                        "access_token",
+                        "expires_in",
+                        "refresh_token",
+                        "refresh_expires_in",
+                        "scope"
+                      ],
+                      "properties": {
+                        "access_token": {
+                          "description": "访问token,过期时间较短。2h",
+                          "type": "string"
+                        },
+                        "expires_in": {
+                          "description": "访问token过期时间",
+                          "type": "integer"
+                        },
+                        "refresh_expires_in": {
+                          "description": "刷新token过期时间",
+                          "type": "integer"
+                        },
+                        "refresh_token": {
+                          "description": "刷新token,过期时间较长。30d",
+                          "type": "string"
+                        },
+                        "scope": {
+                          "description": "作用域",
+                          "type": "string"
+                        },
+                        "token_type": {
+                          "description": "token类型,Bearer",
+                          "type": "string"
+                        },
+                        "user_id": {
+                          "description": "用户id",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/file/multi_upload_file": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "文件"
+        ],
+        "summary": "上传文件列表",
+        "operationId": "fileMultiUploadFile",
+        "parameters": [
+          {
+            "type": "array",
+            "description": "文件列表",
+            "name": "files",
+            "in": "formData",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "文件路径",
+            "name": "file_path",
+            "in": "formData",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "created_at": {
+                      "description": "创建时间",
+                      "type": "integer"
+                    },
+                    "file_md5": {
+                      "description": "文件md5值",
+                      "type": "string"
+                    },
+                    "file_name": {
+                      "description": "文件名称",
+                      "type": "string"
+                    },
+                    "file_path": {
+                      "description": "文件路径",
+                      "type": "string"
+                    },
+                    "file_size": {
+                      "description": "文件大小",
+                      "type": "integer"
+                    },
+                    "file_type": {
+                      "description": "文件类型",
+                      "type": "string"
+                    },
+                    "file_url": {
+                      "description": "上传路径",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "文件目录ID",
+                      "type": "integer"
+                    },
+                    "updated_at": {
+                      "description": "更新时间",
+                      "type": "integer"
+                    },
+                    "user_id": {
+                      "description": "用户id",
+                      "type": "string"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/file/upload_file": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "文件"
+        ],
+        "summary": "上传文件",
+        "operationId": "fileUploadFile",
+        "parameters": [
+          {
+            "description": "文件",
+            "name": "file",
+            "in": "formData",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "文件路径",
+            "name": "file_path",
+            "in": "formData",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "created_at": {
+                      "description": "创建时间",
+                      "type": "integer"
+                    },
+                    "file_md5": {
+                      "description": "文件md5值",
+                      "type": "string"
+                    },
+                    "file_name": {
+                      "description": "文件名称",
+                      "type": "string"
+                    },
+                    "file_path": {
+                      "description": "文件路径",
+                      "type": "string"
+                    },
+                    "file_size": {
+                      "description": "文件大小",
+                      "type": "integer"
+                    },
+                    "file_type": {
+                      "description": "文件类型",
+                      "type": "string"
+                    },
+                    "file_url": {
+                      "description": "上传路径",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "文件目录ID",
+                      "type": "integer"
+                    },
+                    "updated_at": {
+                      "description": "更新时间",
+                      "type": "integer"
+                    },
+                    "user_id": {
+                      "description": "用户id",
+                      "type": "string"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/friend_link/find_friend_list": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "友链"
+        ],
+        "summary": "分页获取友链列表",
+        "operationId": "friendFindFriendList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer"
+                },
+                "page_size": {
+                  "type": "integer"
+                },
+                "sorts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/get_captcha_code": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "认证"
+        ],
+        "summary": "获取验证码",
+        "operationId": "authGetCaptchaCode",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "height": {
+                  "description": "高度",
+                  "type": "integer"
+                },
+                "width": {
+                  "description": "宽度",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "captcha_base64": {
+                      "description": "验证码base64",
+                      "type": "string"
+                    },
+                    "captcha_code": {
+                      "description": "验证码",
+                      "type": "string"
+                    },
+                    "captcha_key": {
+                      "description": "验证码key",
+                      "type": "string"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/get_oauth_authorize_url": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "认证"
+        ],
+        "summary": "第三方登录授权地址",
+        "operationId": "authGetOauthAuthorizeUrl",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "platform"
+              ],
+              "properties": {
+                "platform": {
+                  "description": "平台",
+                  "type": "string"
+                },
+                "state": {
+                  "description": "状态",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "authorize_url": {
+                      "description": "授权地址",
+                      "type": "string"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/get_tourist_info": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "认证"
+        ],
+        "summary": "获取游客身份信息",
+        "operationId": "authGetTouristInfo",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "tourist_id": {
+                      "description": "游客id",
+                      "type": "string"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/login": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "认证"
+        ],
+        "summary": "登录",
+        "operationId": "authLogin",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "username",
+                "password"
+              ],
+              "properties": {
+                "captcha_code": {
+                  "description": "验证码",
+                  "type": "string"
+                },
+                "captcha_key": {
+                  "description": "验证码key",
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "object",
+                      "required": [
+                        "user_id",
+                        "token_type",
+                        "access_token",
+                        "expires_in",
+                        "refresh_token",
+                        "refresh_expires_in",
+                        "scope"
+                      ],
+                      "properties": {
+                        "access_token": {
+                          "description": "访问token,过期时间较短。2h",
+                          "type": "string"
+                        },
+                        "expires_in": {
+                          "description": "访问token过期时间",
+                          "type": "integer"
+                        },
+                        "refresh_expires_in": {
+                          "description": "刷新token过期时间",
+                          "type": "integer"
+                        },
+                        "refresh_token": {
+                          "description": "刷新token,过期时间较长。30d",
+                          "type": "string"
+                        },
+                        "scope": {
+                          "description": "作用域",
+                          "type": "string"
+                        },
+                        "token_type": {
+                          "description": "token类型,Bearer",
+                          "type": "string"
+                        },
+                        "user_id": {
+                          "description": "用户id",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/logoff": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "认证"
+        ],
+        "summary": "注销",
+        "operationId": "authLogoff",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/logout": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "认证"
+        ],
+        "summary": "登出",
+        "operationId": "authLogout",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/page/find_page_list": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "页面"
+        ],
+        "summary": "分页获取页面列表",
+        "operationId": "pageFindPageList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer"
+                },
+                "page_size": {
+                  "type": "integer"
+                },
+                "sorts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/phone_login": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "认证"
+        ],
+        "summary": "手机登录",
+        "operationId": "authPhoneLogin",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "phone",
+                "verify_code"
+              ],
+              "properties": {
+                "phone": {
+                  "description": "手机号",
+                  "type": "string"
+                },
+                "verify_code": {
+                  "description": "验证码",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "object",
+                      "required": [
+                        "user_id",
+                        "token_type",
+                        "access_token",
+                        "expires_in",
+                        "refresh_token",
+                        "refresh_expires_in",
+                        "scope"
+                      ],
+                      "properties": {
+                        "access_token": {
+                          "description": "访问token,过期时间较短。2h",
+                          "type": "string"
+                        },
+                        "expires_in": {
+                          "description": "访问token过期时间",
+                          "type": "integer"
+                        },
+                        "refresh_expires_in": {
+                          "description": "刷新token过期时间",
+                          "type": "integer"
+                        },
+                        "refresh_token": {
+                          "description": "刷新token,过期时间较长。30d",
+                          "type": "string"
+                        },
+                        "scope": {
+                          "description": "作用域",
+                          "type": "string"
+                        },
+                        "token_type": {
+                          "description": "token类型,Bearer",
+                          "type": "string"
+                        },
+                        "user_id": {
+                          "description": "用户id",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/ping": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "ping",
+        "operationId": "ping",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "string"
+                    },
+                    "env": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "rpc_status": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "runtime": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/register": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "认证"
+        ],
+        "summary": "注册",
+        "operationId": "authRegister",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "username",
+                "password",
+                "confirm_password",
+                "email",
+                "verify_code"
+              ],
+              "properties": {
+                "confirm_password": {
+                  "description": "确认密码",
+                  "type": "string"
+                },
+                "email": {
+                  "description": "邮箱",
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "verify_code": {
+                  "description": "验证码",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/remark/add_remark": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "留言"
+        ],
+        "summary": "创建留言",
+        "operationId": "remarkAddRemark",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "message_content"
+              ],
+              "properties": {
+                "message_content": {
+                  "description": "留言内容",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "created_at": {
+                      "description": "发布时间",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "主键id",
+                      "type": "integer"
+                    },
+                    "ip_address": {
+                      "description": "用户ip",
+                      "type": "string"
+                    },
+                    "ip_source": {
+                      "description": "用户地址",
+                      "type": "string"
+                    },
+                    "is_review": {
+                      "description": "是否审核",
+                      "type": "integer"
+                    },
+                    "message_content": {
+                      "description": "留言内容",
+                      "type": "string"
+                    },
+                    "terminal_id": {
+                      "description": "终端id",
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "description": "更新时间",
+                      "type": "integer"
+                    },
+                    "user": {
+                      "description": "用户信息",
+                      "type": "object",
+                      "required": [
+                        "user_id",
+                        "username",
+                        "avatar",
+                        "nickname"
+                      ],
+                      "properties": {
+                        "avatar": {
+                          "type": "string"
+                        },
+                        "gender": {
+                          "description": "性别 0未知 1男 2女",
+                          "type": "integer"
+                        },
+                        "intro": {
+                          "description": "简介",
+                          "type": "string"
+                        },
+                        "nickname": {
+                          "type": "string"
+                        },
+                        "user_id": {
+                          "type": "string"
+                        },
+                        "username": {
+                          "type": "string"
+                        },
+                        "website": {
+                          "description": "网站",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "user_id": {
+                      "description": "用户id",
+                      "type": "string"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/remark/find_remark_list": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "留言"
+        ],
+        "summary": "分页获取留言列表",
+        "operationId": "remarkFindRemarkList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer"
+                },
+                "page_size": {
+                  "type": "integer"
+                },
+                "sorts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/reset_password": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "认证"
+        ],
+        "summary": "重置密码",
+        "operationId": "authResetPassword",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "password",
+                "confirm_password",
+                "email",
+                "verify_code"
+              ],
+              "properties": {
+                "confirm_password": {
+                  "description": "确认密码",
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "verify_code": {
+                  "description": "验证码",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/send_email_verify_code": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "认证"
+        ],
+        "summary": "发送邮件验证码",
+        "operationId": "authSendEmailVerifyCode",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "email",
+                "type"
+              ],
+              "properties": {
+                "email": {
+                  "description": "邮箱",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "类型 register,reset_password,bind_email,bind_phone",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/send_phone_verify_code": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "认证"
+        ],
+        "summary": "发送手机验证码",
+        "operationId": "authSendPhoneVerifyCode",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "phone",
+                "type"
+              ],
+              "properties": {
+                "phone": {
+                  "description": "手机号",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "类型 register,reset_password,bind_email,bind_phone",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/tag/find_tag_list": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "标签"
+        ],
+        "summary": "分页获取标签列表",
+        "operationId": "tagFindTagList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer"
+                },
+                "page_size": {
+                  "type": "integer"
+                },
+                "sorts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "tag_name": {
+                  "description": "标签名",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/talk/find_talk_list": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "说说"
+        ],
+        "summary": "分页获取说说列表",
+        "operationId": "talkFindTalkList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer"
+                },
+                "page_size": {
+                  "type": "integer"
+                },
+                "sorts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "list": {},
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/talk/get_talk": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "说说"
+        ],
+        "summary": "查询说说",
+        "operationId": "talkGetTalk",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "comment_count": {
+                      "description": "评论量",
+                      "type": "integer"
+                    },
+                    "content": {
+                      "description": "评论内容",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "创建时间",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "说说ID",
+                      "type": "integer"
+                    },
+                    "img_list": {
+                      "description": "图片URL列表",
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "is_top": {
+                      "description": "是否置顶",
+                      "type": "integer"
+                    },
+                    "like_count": {
+                      "description": "点赞量",
+                      "type": "integer"
+                    },
+                    "status": {
+                      "description": "状态 1.公开 2.私密",
+                      "type": "integer"
+                    },
+                    "updated_at": {
+                      "description": "更新时间",
+                      "type": "integer"
+                    },
+                    "user": {
+                      "description": "用户信息",
+                      "type": "object",
+                      "required": [
+                        "user_id",
+                        "username",
+                        "avatar",
+                        "nickname"
+                      ],
+                      "properties": {
+                        "avatar": {
+                          "type": "string"
+                        },
+                        "gender": {
+                          "description": "性别 0未知 1男 2女",
+                          "type": "integer"
+                        },
+                        "intro": {
+                          "description": "简介",
+                          "type": "string"
+                        },
+                        "nickname": {
+                          "type": "string"
+                        },
+                        "user_id": {
+                          "type": "string"
+                        },
+                        "username": {
+                          "type": "string"
+                        },
+                        "website": {
+                          "description": "网站",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "user_id": {
+                      "description": "用户ID",
+                      "type": "string"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/talk/like_talk": {
+      "put": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "说说"
+        ],
+        "summary": "点赞说说",
+        "operationId": "talkLikeTalk",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/third_login": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "认证"
+        ],
+        "summary": "第三方登录",
+        "operationId": "authThirdLogin",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "platform"
+              ],
+              "properties": {
+                "code": {
+                  "description": "授权码",
+                  "type": "string"
+                },
+                "platform": {
+                  "description": "平台",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "object",
+                      "required": [
+                        "user_id",
+                        "token_type",
+                        "access_token",
+                        "expires_in",
+                        "refresh_token",
+                        "refresh_expires_in",
+                        "scope"
+                      ],
+                      "properties": {
+                        "access_token": {
+                          "description": "访问token,过期时间较短。2h",
+                          "type": "string"
+                        },
+                        "expires_in": {
+                          "description": "访问token过期时间",
+                          "type": "integer"
+                        },
+                        "refresh_expires_in": {
+                          "description": "刷新token过期时间",
+                          "type": "integer"
+                        },
+                        "refresh_token": {
+                          "description": "刷新token,过期时间较长。30d",
+                          "type": "string"
+                        },
+                        "scope": {
+                          "description": "作用域",
+                          "type": "string"
+                        },
+                        "token_type": {
+                          "description": "token类型,Bearer",
+                          "type": "string"
+                        },
+                        "user_id": {
+                          "description": "用户id",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/user/delete_user_bind_third_party": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户"
+        ],
+        "summary": "删除用户绑定第三方平台账号",
+        "operationId": "userDeleteUserBindThirdParty",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "platform"
+              ],
+              "properties": {
+                "platform": {
+                  "description": "平台",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/user/get_user_info": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户"
+        ],
+        "summary": "获取用户信息",
+        "operationId": "userGetUserInfo",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "avatar": {
+                      "description": "用户头像",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "创建时间",
+                      "type": "integer"
+                    },
+                    "email": {
+                      "description": "用户邮箱",
+                      "type": "string"
+                    },
+                    "gender": {
+                      "description": "性别 0未知 1男 2女",
+                      "type": "integer"
+                    },
+                    "intro": {
+                      "description": "简介",
+                      "type": "string"
+                    },
+                    "nickname": {
+                      "description": "用户昵称",
+                      "type": "string"
+                    },
+                    "phone": {
+                      "description": "用户手机号",
+                      "type": "string"
+                    },
+                    "register_type": {
+                      "description": "注册方式",
+                      "type": "string"
+                    },
+                    "third_party": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "platform",
+                          "open_id",
+                          "nickname",
+                          "avatar",
+                          "created_at"
+                        ],
+                        "properties": {
+                          "avatar": {
+                            "description": "头像",
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "description": "创建时间",
+                            "type": "integer"
+                          },
+                          "nickname": {
+                            "description": "昵称",
+                            "type": "string"
+                          },
+                          "open_id": {
+                            "description": "平台用户id",
+                            "type": "string"
+                          },
+                          "platform": {
+                            "description": "平台",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "user_id": {
+                      "description": "用户id",
+                      "type": "string"
+                    },
+                    "username": {
+                      "description": "用户名",
+                      "type": "string"
+                    },
+                    "website": {
+                      "description": "网站",
+                      "type": "string"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/user/get_user_like": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户"
+        ],
+        "summary": "获取用户点赞列表",
+        "operationId": "userGetUserLike",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "article_like_set": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "comment_like_set": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "talk_like_set": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/user/update_user_avatar": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户"
+        ],
+        "summary": "修改用户头像",
+        "operationId": "userUpdateUserAvatar",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "avatar"
+              ],
+              "properties": {
+                "avatar": {
+                  "description": "头像",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/user/update_user_bind_email": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户"
+        ],
+        "summary": "修改用户绑定邮箱",
+        "operationId": "userUpdateUserBindEmail",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "email",
+                "verify_code"
+              ],
+              "properties": {
+                "email": {
+                  "description": "邮箱",
+                  "type": "string"
+                },
+                "verify_code": {
+                  "description": "验证码",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/user/update_user_bind_phone": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户"
+        ],
+        "summary": "修改用户绑定手机号",
+        "operationId": "userUpdateUserBindPhone",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "phone",
+                "verify_code"
+              ],
+              "properties": {
+                "phone": {
+                  "description": "手机号",
+                  "type": "string"
+                },
+                "verify_code": {
+                  "description": "验证码",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/user/update_user_bind_third_party": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户"
+        ],
+        "summary": "修改用户绑定第三方平台账号",
+        "operationId": "userUpdateUserBindThirdParty",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "platform",
+                "code"
+              ],
+              "properties": {
+                "code": {
+                  "description": "授权码",
+                  "type": "string"
+                },
+                "platform": {
+                  "description": "平台",
+                  "type": "string"
+                },
+                "state": {
+                  "description": "状态",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/user/update_user_info": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户"
+        ],
+        "summary": "修改用户信息",
+        "operationId": "userUpdateUserInfo",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "nickname"
+              ],
+              "properties": {
+                "gender": {
+                  "description": "性别 0未知 1男 2女",
+                  "type": "integer"
+                },
+                "intro": {
+                  "description": "简介",
+                  "type": "string"
+                },
+                "nickname": {
+                  "description": "昵称",
+                  "type": "string"
+                },
+                "website": {
+                  "description": "网站",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/user/update_user_password": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户"
+        ],
+        "summary": "修改用户密码",
+        "operationId": "userUpdateUserPassword",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "old_password",
+                "new_password",
+                "confirm_password"
+              ],
+              "properties": {
+                "confirm_password": {
+                  "description": "确认密码",
+                  "type": "string"
+                },
+                "new_password": {
+                  "description": "新密码",
+                  "type": "string"
+                },
+                "old_password": {
+                  "description": "旧密码",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object"
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog-api/v1/websocket": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "WebSocket"
+        ],
+        "summary": "WebSocket消息",
+        "operationId": "websocketWebsocket",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "AppName": {
+      "description": "应用名称，用于标识调用方",
+      "type": "apiKey",
+      "name": "App-Name",
+      "in": "header"
+    },
+    "TerminalId": {
+      "description": "终端id，用于标识用户使用设备",
+      "type": "apiKey",
+      "name": "Terminal-Id",
+      "in": "header"
+    },
+    "Timestamp": {
+      "description": "时间戳，用于校验请求是否过期",
+      "type": "apiKey",
+      "name": "Timestamp",
+      "in": "header"
+    },
+    "Token": {
+      "description": "token，用户登录凭证",
+      "type": "apiKey",
+      "name": "Token",
+      "in": "header"
+    },
+    "Uid": {
+      "description": "用户id，用于标识用户",
+      "type": "apiKey",
+      "name": "Uid",
+      "in": "header"
+    },
+    "XTsToken": {
+      "description": "游客token，使用时间戳和终端id生成",
+      "type": "apiKey",
+      "name": "X-Ts-Token",
+      "in": "header"
+    }
+  },
+  "x-date": "2025-05-29 10:41:51",
+  "x-description": "This is a goctl generated swagger file.",
+  "x-github": "https://github.com/zeromicro/go-zero",
+  "x-go-zero-doc": "https://go-zero.dev/",
+  "x-goctl-version": "1.8.4-beta"
+}

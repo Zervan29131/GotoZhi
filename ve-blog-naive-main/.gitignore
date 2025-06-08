@@ -1,0 +1,40 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+.history
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.local
+
+# 包管理器
+stats.html
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# 日志
+logs
+*.log
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+ppnpm-debug.log*
+lerna-debug.log*
+
+# 压缩包
+*.zip
+*.rar
+*.7z
+*.tar
+
+# 全局组件声明
+# 每次启动服务或打包都会生成最新的，所以无需传到 Git 上
+components.d.ts
+.eslintrc-auto-import.json
