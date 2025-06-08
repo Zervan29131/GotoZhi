@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package user;
+// go_package指定生成go包（也就是生成的.pb.go文件）的路径
+// PS: 路径中要带/
+// 在同级目录下执行 goctl rpc protoc user.proto --go_out=./ --go-grpc_out=./ --zrpc_out=. --client=true 生成
+option go_package = "./user";
+
+// 注册请求
+message RegisterRequest {
+  string Name = 1;
+  string Mobile = 2;
+  string Gender = 3;
+  string Password = 4;
+}
+
+// 注册响应
+message RegisterResponse {
+  int64 Id = 1; // 注册完返回ID信息
+  string Name = 2;
+  string Mobile = 3;
+  string Gender = 4;
+}
+
+// 登录请求
+message LoginRequest {
+  string Mobile = 1;
+  string Password = 2;
+}
+
+// 登录响应
+message LoginResponse {
+  // 注意，登录后我们需要返回token的授权信息，但是这里并没有返回token
+  // 是因为我们的token应该是api层去做的事，放在api层更合适
+  int64 Id = 1;
+  string Name = 2;
+  string Mobile = 3;
+  string Gender = 4;
+}
+
+// 用户信息请求
+message UserInfoRequest {
+  int64 Id = 1;
+}
+
+// 用户信息响应
+message UserInfoResponse {
+  int64 Id = 1;
+  string Name = 2;
+  string Mobile = 3;
+  string Gender = 4;
+}
+
+/*
+  service 定义服务
+  rpc 定义方法
+  返回值类型
+*/
+
+// 这里命名为User 它生成客户端代码时，会生成一个userclient的目录
+service User {
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc UserInfo(UserInfoRequest) returns (UserInfoResponse);
+}

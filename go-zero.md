@@ -2,35 +2,38 @@
 
 ## 简介
 
-go-zero 是一个非常受欢迎的go语言微服务框架，截止到目前为止github上拥有高达28k的star。
-它由国内大神Kevin Wan主导开发，它提供了许多开箱即用的功能，比如：限流、熔断、链路追踪、缓存、api参数自动校验、命令行代码生成等等。
+go-zero 是go语言微服务框架，由国内大神Kevin Wan主导开发，提供了许多开箱即用的功能，比如：限流、熔断、链路追踪、缓存、api参数自动校验、命令行代码生成等等。
 复杂的事情都是从简单的事情开始的，麻雀虽小但是五脏俱全，先做一个最小、最简单的应用，然后吃透它，虽然不能做到完全掌握，但是至少能掌握和理解其中最重要核心的套路，以后即使面对比它更复杂的应用，也能快速掌握。
-比如做一个论坛吧，架构简单，涉及的的表也比较少，类似于百度贴吧，任何用户都可以去发表言论，然后其它用户可以评论。
 
 ## 准备工作
 
-- 本地安装Go，Go版本[go1.21.0](https://github.com/golang/go/releases/tag/go1.21.0)
-- 本地安装 goctl，安装完后通过goctl --version查看是否安装成功。
-- 本地安装protoc，protoc-gen-go
-- 可访问的Mysql，Redis，Etcd，对版本不做要求
-- IDE，VSCode
-- 终端 iTerm2
-- 调试工具 Postman
-- 浏览器 Chrome
+- 本地安装go， goctl，protoc，protoc-gen-go，安装完后通过goctl --version查看是否安装成功。
+- Mysql，Redis，Etcd，对版本不做要求
+- IDE，VSCode，终端 iTerm2，调试工具 Postman，浏览器 Chrome
 
-```shell
+
 安装goctl
+```
 go install github.com/zeromicro/go-zero/tools/goctl@latest
+```
 下载超时可以使用如下代码进行配置代理
+```
 go env -w GOPROXY=https://goproxy.cn 
+```
 在终端中看到 zsh: command not found: goctl 的错误消息时
 需要配置 GOPATH 和 GOROOT 环境变量
 如果 goctl 在 bin 目录中，但仍然不能找到，需要将该目录添加到 PATH 中。
 可以通过编辑 shell 配置文件（如 .zshrc 或 .bashrc）来实现
+
+```
 echo 'export PATH=$PATH:~/go/bin' >> ~/.zshrc
+```
 修改完后，运行以下命令以重新加载配置
+```
 source ~/.zshrc
+```
 安装了protoc编译器后还需要安装两个go相关的插件，protoc-gen-go、protoc-gen-go-grpc 用于生成go语言的grpc代码。
+```
 go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
 ```
@@ -42,8 +45,8 @@ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
 我们把每个模块做为一个服务，每个服务我们分为api、rpc、model三个主要的部分。
 
 ```shell
-mkdir forum && cd forum
-go mod init forum
+mkdir Goblog && cd GoBlog
+go mod init GoBlog
 
 mkdir service
 mkdir service/user 
@@ -86,11 +89,9 @@ tree
 在传统的api服务中，只需要api去和model交互，但是在微服务架构中，会多一层rpc，由rpc去和model交互的，整体关系如下：
 api -> rpc -> model
 
-## model
+## model模块
 
-首先使用user模块来演示
-
-为了演示方便，我们使用mysql数据库，可以在本地先创建一个demo数据库database，然后创建一个users表，
+首先使用user模块来演示，使用mysql数据库，可以在本地先创建一个demo数据库database，然后创建一个users表，
 
 ```mysql
 CREATE TABLE users (
@@ -149,11 +150,11 @@ goctl model mysql datasource --url="root:Passw0rd@tcp(127.0.0.1:3306)/demo" --ta
 
 虽然可以通过本地数据库直接生成model，但是为了别人拿到项目后能快速初始化表结构，还是建议在model层下放置完整的表sql文件。
 
-## rpc
+## rpc模块
 
 ### rpc结构初始化
 
-下面我们来开始创建rpc层，创建rpc首先需要创建proto文件，在/service/user/rpc目录下新建user.proto文件。
+接下来创建rpc层，创建rpc首先需要创建proto文件，在/service/user/rpc目录下新建user.proto文件。
 
 ```protobuf
 syntax = "proto3";
@@ -322,7 +323,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 ### rpc用户注册实现
 
-有了前面的配置，实现逻辑就比较简单了，我们只需要在`service/user/rpc/internal/logic/registerlogic.go`中实现`RegisterLogic`方法即可。
+要实现逻辑，需要在`service/user/rpc/internal/logic/registerlogic.go`中实现`RegisterLogic`方法。
 
 ```go
 func (l *RegisterLogic) Register(in *user.RegisterRequest) (*user.RegisterResponse, error) {
@@ -370,6 +371,18 @@ func (l *RegisterLogic) Register(in *user.RegisterRequest) (*user.RegisterRespon
 
 1. 由于配置文件中是配置了etcd，因此需要先启动etcd服务。mac电脑可以通过brew 安装。
 2. 通过grpcurl工具来测试rpc服务，默认是不能调试的，需要先开启dev模式，在`service/user/rpc/etc/user.yaml`中添加`Mode: dev`即可。
+```
+# 启动某个应用，这里用 etcd 做演示
+brew services start etcd
+
+# 停止某个应用
+brew services stop etcd
+
+# 查看当前应用列表
+# 可以看到相关应用的状况
+brew services list 
+```
+
 
 ```yaml
 Name: user.rpc
@@ -390,21 +403,20 @@ Starting rpc server at 0.0.0.0:8080...
 然后在再开一个终端，用于测试
 
 ```shell
-$ grpcurl -plaintext 127.0.0.1:8080 list # 查看有哪些服务
+grpcurl -plaintext 127.0.0.1:8080 list # 查看有哪些服务
 grpc.health.v1.Health
 grpc.reflection.v1.ServerReflection
 grpc.reflection.v1alpha.ServerReflection
 user.User
-shell
 
-$ grpcurl -plaintext 127.0.0.1:8080 list user.User # 查看某个服务下的方法
+grpcurl -plaintext 127.0.0.1:8080 list user.User # 查看某个服务下的方法
 user.User.Login
 user.User.Register
 user.User.UserInfo
-shell
 
 # 这里需要注意字段名要和proto文件一致
-$ grpcurl -plaintext -d '{"Name": "李四", "Mobile": "18200365766", "Password": "123456"}' 127.0.0.1:8080 user.User/Register # 调用服务的方法
+grpcurl -plaintext -d '{"Name": "李四", "Mobile": "18200365766", "Password": "123456"}' 127.0.0.1:8080 user.User/Register 
+# 调用服务的方法
 {
   "Id": "3",
   "Name": "李四",
@@ -451,7 +463,7 @@ func (l *LoginLogic) Login(in *user.LoginRequest) (*user.LoginResponse, error) {
 同理在终端进行测试效果如下：
 
 ```shell
-$ grpcurl -plaintext -d '{"Mobile": "18200365766", "Password": "123456"}' 127.0.0.1:8080 user.User/Login
+grpcurl -plaintext -d '{"Mobile": "18200365766", "Password": "123456"}' 127.0.0.1:8080 user.User/Login
 {
   "Id": "3",
   "Name": "李四",
@@ -487,9 +499,9 @@ func (l *UserInfoLogic) UserInfo(in *user.UserInfoRequest) (*user.UserInfoRespon
 终端测试
 
 ```shell
-grpcurl -plaintext -d '{"Id": 3}' 127.0.0.1:8080 user.User/UserInfo
+grpcurl -plaintext -d '{"Id": 1}' 127.0.0.1:8080 user.User/UserInfo
 {
-  "Id": "3",
+  "Id": "1",
   "Name": "李四"
 }
 ```
@@ -573,7 +585,7 @@ func (l *LoginLogic) Login(in *user.LoginRequest) (*user.LoginResponse, error) {
 }
 ```
 
-## api实战
+## api模块
 
 ### api结构初始化
 
@@ -607,7 +619,9 @@ service user {
 }
 ```
 
-如果不清楚api定义的格式，可以参考[api文档](https://link.juejin.cn?target=https%3A%2F%2Fgo-zero.dev%2Fdocs%2Ftasks%2Fdsl%2Fapi) 终端执行api代码生成命令`goctl api go -api ./user.api -dir ./`
+如果不清楚api定义的格式，可以参考[api文档](https://link.juejin.cn?target=https%3A%2F%2Fgo-zero.dev%2Fdocs%2Ftasks%2Fdsl%2Fapi) 
+
+终端执行api代码生成命令`goctl api go -api ./user.api -dir ./`
 
 ```shell
 .
@@ -642,10 +656,7 @@ api不直接与model通信，它是和rpc通信，所以需要将api和rpc做关
 在`service/user/api/etc/user.yaml`中添加
 
 ```yaml
-yaml
-
- 代码解读
-复制代码#...省略
+#...省略
 
 # 一个rpc一个配置项
 # rpc通过etcd来做服务发现和注册
@@ -661,10 +672,7 @@ UserRpc:
 修改`service/user/api/internal/config/config.go`文件
 
 ```go
-go
-
- 代码解读
-复制代码type Config struct {
+type Config struct {
 	rest.RestConf
 
 	// 这里直接定义一个字段就行 在config初始化时，会自动将etc中rpc配置加载到config中
@@ -678,10 +686,7 @@ go
 修改`service/user/api/internal/svc/servicecontext.go`
 
 ```go
-go
-
- 代码解读
-复制代码type ServiceContext struct {
+type ServiceContext struct {
 	Config config.Config
 
 	UserRpc userclient.User // 关联user rpc,userclient是rpc中提供的客户端包
@@ -748,7 +753,7 @@ curl --location 'http://localhost:8888/api/user/register' \
 --header 'Content-Type: application/json' \
 --data '{
     "name": "keke",
-    "mobile": "17655434667",
+    "mobile": "17655434668",
     "password": "ksdafsda",
     "gender": "male"
 }'
@@ -856,7 +861,7 @@ type Config struct {
 
 ### 登录api实现
 
-有了前面的jwt铺垫，我们实现登录api就很容易了,我们在业务上只需要，在认证成功后，返回token，后过期时间即可。
+有了前面的jwt铺垫，实现登录api就很容易了，业务上只需要在认证成功后，返回token，后过期时间即可。
 
 #### api文件添加接口信息
 

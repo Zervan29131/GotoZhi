@@ -1,0 +1,50 @@
+// api路径下执行 goctl api go -api ./user.api -dir ./
+type (
+	// 注册请求
+	RegisterRequest {
+		Name     string `json:"name"`
+		Mobile   string `json:"mobile"`
+		Gender   string `json:"gender"`
+		Password string `json:"password"`
+	}
+	// 注册响应
+	RegisterResponse {
+		ID     int64  `json:"id"`
+		Name   string `json:"name"`
+		Mobile string `json:"mobile"`
+		Gender string `json:"gender"`
+	}
+	// 登录请求
+	LoginRequest {
+		Mobile   string `json:"mobile"`
+		Password string `json:"password"`
+	}
+	// 登录响应
+	LoginResponse {
+		Token   string `json:"token"`
+		Expired int64  `json:"expired"`
+	}
+	// 用户信息请求 由于无需参数所以不写
+	// 用户信息响应
+	UserInfoResponse {
+		ID     int64  `json:"id"`
+		Name   string `json:"name"`
+		Mobile string `json:"mobile"`
+		Gender string `json:"gender"`
+	}
+)
+
+// 其下的所有service都会使用jwt鉴权,注意这里是server不是service
+@server (
+	jwt: Auth
+)
+// api定义的地方
+service user {
+	@handler Login
+	post /api/user/login (LoginRequest) returns (LoginResponse)
+
+	@handler UserInfo
+	// 这里没有请求参数哦
+	get /api/user/info returns (UserInfoResponse)
+}
+

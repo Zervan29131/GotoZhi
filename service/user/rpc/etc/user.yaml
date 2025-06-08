@@ -1,0 +1,10 @@
+Name: user.rpc
+ListenOn: 0.0.0.0:8080
+Mode: dev # 添加它go run user.go
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: user.rpc
+
+Mysql:
+  DataSource: root:Passw0rd@tcp(127.0.0.1:3306)/demo?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai

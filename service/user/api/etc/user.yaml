@@ -1,0 +1,12 @@
+Name: user
+Host: 0.0.0.0
+Port: 8888
+UserRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379 # 注意这里是etcd的地址而非rpc服务的地址
+    Key: user.rpc
+# 用于jwt授权
+Auth:
+  AccessSecret: "abcdefg22434" # 签名密钥 注意这里要求长度不少于8
+  AccessExpire: 3600      # 单位秒 默认1小时
